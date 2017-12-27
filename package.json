@@ -26,11 +26,14 @@
     "yarn": ">=1.3.2"
   },
   "scripts": {
-    "start": "node src/index.js",
-    "lint": "eslint --ext .js,.vue src test/unit/specs test/e2e/specs"
+    "start": "node --require 'babel-register' src/index.js",
+    "lint": "standard 'src/**/*.js'"
   },
   "dependencies": {},
   "devDependencies": {
+    "babel": "^6.23.0",
+    "babel-preset-env": "^1.6.1",
+    "babel-register": "^6.26.0",
     "standard": "^10.0.3"
   }
 }
