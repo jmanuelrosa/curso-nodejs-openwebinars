@@ -1,8 +1,13 @@
 import http from 'http'
 
 const server = http.createServer((request, response) => {
-  response.write('<h1>Curso NodeJS de OpenWebinars!</h1>')
-  response.end()
+  if (request.method === 'GET') {
+    response.write('<h1>Metodo valido</h1>')
+    return response.end()
+  }
+
+  response.write('<h1>Esta intentando acceder con un metodo no valido</h1>')
+  return response.end()
 })
 
 server.listen(8000, 'localhost', err => {
