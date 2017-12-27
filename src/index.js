@@ -2,12 +2,24 @@ import path from 'path'
 import fs from 'fs'
 import http from 'http'
 
-const file = `./src/index.html`
-
 const server = http.createServer((request, response) => {
-  response.writeHead(200, { 'Content-Type': 'text/html; charset=UTF-8' })
+  let filePath = request.url
+  if (filePath === '/') {
+    filePath = 'index.html'
+  }
+  filePath = `./src/${filePath}`
 
-  fs.readFile(file, (err, content) => {
+  const extname = path.extname(filePath)
+  let contentType = 'text/html'
+
+  switch (extname) {
+    case '.css':
+      contentType = 'text/css'
+      break
+  }
+  response.writeHead(200, { 'Content-Type': `${contentType}; charset=UTF-8` })
+
+  fs.readFile(filePath, (err, content) => {
     if (err) {
       return console.log(err)
     }
