@@ -1,30 +1,23 @@
-// Muestra el número total de lineas, y el número de palabras por linea
-// Ejemplo: npm start sample.txt
-import readline from 'readline'
-import async from './async'
-import events from './events'
+import net from 'net'
 
-const file = process.argv[2]
-
-const rl = readline.createInterface({
-  input: process.stdin,
-  output: process.stdout
+const server = net.createServer(socket => {
+  socket.on('data', data => {
+    console.log(data.toString())
+    socket.write('Mundo?')
+  })
 })
 
-rl.question(
-  `Como quiere leer el fichero?
-  1. De forma asíncrona (default)
-  2. Con eventos
-  Seleccione una opcion: `,
-  value => {
-    console.log(`Selecciono ${value}\n\n`)
+server.on('error', err => {
+  throw err
+})
 
-    switch (value) {
-      case '2':
-        events(file)
-        break
-      default:
-        async(file)
-    }
-    rl.close()
-  })
+server.on('connect', () => console.log('socket connected'))
+
+server.listen(
+  {
+    host: 'localhost',
+    port: 8000,
+    exclusive: true
+  },
+  () => console.log('Servidor socket abierto en ', server.address())
+)
