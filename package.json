@@ -27,7 +27,6 @@
   },
   "scripts": {
     "start": "node --require 'babel-register' src/index.js",
-    "client": "node --require 'babel-register' src/client.js",
     "lint": "standard 'src/**/*.js'"
   },
   "dependencies": {},

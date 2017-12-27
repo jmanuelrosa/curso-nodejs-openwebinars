@@ -1,23 +1,16 @@
-import net from 'net'
-
-const server = net.createServer(socket => {
-  socket.on('data', data => {
-    console.log(data.toString())
-    socket.write('Mundo?')
-  })
+process.on('unhandledRejection', (err, p) => {
+  console.log('Custom Error: An unhandledRejection occurred')
+  console.log(`Custom Error: Rejection: ${err}`)
 })
 
-server.on('error', err => {
-  throw err
+process.on('uncaughtException', err => {
+  console.log('Custom Error: An uncaughtException occurred')
+  console.log(`Custom Error: Rejection: ${err}`)
 })
 
-server.on('connect', () => console.log('socket connected'))
+setTimeout(() => console.log('This will still run.'), 500)
 
-server.listen(
-  {
-    host: 'localhost',
-    port: 8000,
-    exclusive: true
-  },
-  () => console.log('Servidor socket abierto en ', server.address())
-)
+// El error es JSON.pasre
+Promise(resolve => JSON.pasre({ color: 'azul' }))
+// test()
+// throw 'casa'
