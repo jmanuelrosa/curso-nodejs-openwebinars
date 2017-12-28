@@ -1,49 +1,49 @@
 // Check document is saved
-// Connect: mongo
-// > use films;
-// > show dbs;
-// > show dbs;
-// After save: db.Film.find().pretty()
+// Connect: psql postgres
+// > \l
+// > \c films
+// > \dt (show tables)
+// After save: SELECT * FROM "Film";
 
-import mongoose from 'mongoose'
+import Sequelize from 'Sequelize'
 
-const host = 'mongodb://127.0.0.1:27017/films'
-
-mongoose.set('debug', true)
-mongoose.Promise = global.Promise
-
-const connection =  mongoose.createConnection(
-  host,
-  { poolSize: 200 }
-)
-
-connection.on('error', err => {
-  console.log(' ⚑ Mongo Error'.bold.red, err)
-  return process.exit()
+const sequelize = new Sequelize('films', '', '', {
+  host: 'localhost',
+  dialect: 'postgres',
+  pool: {
+    max: 5,
+    min: 0,
+    idle: 10000
+  },
 })
 
-connection.on('connected', error => {
-  console.log(' ▣ Connected to Database');
-})
-
-const filmSchema = new mongoose.Schema(
+const Film = sequelize.define(
+  'Film',
   {
-    _id: mongoose.Schema.Types.ObjectId,
-    title: { type: String, trim: true, required: true },
-    poster: { type: String, trim: true, required: true }
+    id: {
+      type: Sequelize.INTEGER,
+      autoIncrement: true,
+      field: 'id',
+      primaryKey: true
+    },
+    title: {
+      type: Sequelize.STRING,
+      field: 'title'
+    },
+    poster: {
+      type: Sequelize.STRING,
+      field: 'poster'
+    }
   },
   {
-    strict: false
+    freezeTableName: true
   }
 )
 
-const Film = connection.model('Film', filmSchema)
-
-const newDocument = new Film({
-  _id: new mongoose.Types.ObjectId(),
-  title: 'Star Wars: The Last Jedi',
-  poster: 'https://lumiere-a.akamaihd.net/v1/images/the-last-jedi-theatrical-poster-film-page_bca06283.jpeg?region=0%2C0%2C480%2C711'
+const newFilm = Film.sync({ force: true })
+  .then(() => {
+    return Film.create({
+      title: 'Star Wars: The Last Jedi',
+      poster: 'https://lumiere-a.akamaihd.net/v1/images/the-last-jedi-theatrical-poster-film-page_bca06283.jpeg?region=0%2C0%2C480%2C711'
+    })
 })
-newDocument.save(err => {
-  if (err) throw err
-});
