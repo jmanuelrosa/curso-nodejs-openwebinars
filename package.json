@@ -35,8 +35,10 @@
     "babel": "^6.23.0",
     "babel-preset-env": "^1.6.1",
     "babel-register": "^6.26.0",
-    "mongoose": "^5.0.0-rc0",
     "nodemon": "^1.14.3",
+    "pg": "^6.4.2",
+    "pg-hstore": "^2.3.2",
+    "sequelize": "^4.28.6",
     "standard": "^10.0.3"
   }
 }
