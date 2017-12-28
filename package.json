@@ -31,12 +31,14 @@
     "lint": "standard 'src/**/*.js'"
   },
   "dependencies": {
-    "express": "^4.16.2"
+    "express": "^4.16.2",
+    "morgan": "^1.9.0"
   },
   "devDependencies": {
     "babel": "^6.23.0",
     "babel-preset-env": "^1.6.1",
     "babel-register": "^6.26.0",
+    "body-parser": "^1.18.2",
     "nodemon": "^1.14.3",
     "standard": "^10.0.3"
   }
