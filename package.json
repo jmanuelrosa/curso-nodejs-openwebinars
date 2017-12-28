@@ -30,15 +30,14 @@
     "watch": "nodemon",
     "lint": "standard 'src/**/*.js'"
   },
-  "dependencies": {},
+  "dependencies": {
+    "express": "^4.16.2"
+  },
   "devDependencies": {
     "babel": "^6.23.0",
     "babel-preset-env": "^1.6.1",
     "babel-register": "^6.26.0",
     "nodemon": "^1.14.3",
-    "pg": "^6.4.2",
-    "pg-hstore": "^2.3.2",
-    "sequelize": "^4.28.6",
     "standard": "^10.0.3"
   }
 }
