@@ -1,3 +1,4 @@
+import path from 'path'
 import express from 'express'
 import bodyParser from 'body-parser'
 import logger from 'morgan'
@@ -12,8 +13,12 @@ app.use(logger('combined'))
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 
+app.set('views', path.join(__dirname, 'views'))
+app.set('view engine', 'pug')
+
 app.get('/', (req, res) => {
-  res.end('Hola Mundo!')
+  res.render('home')
+  // res.render('homeVars', { title: 'Open Webinars!', message: 'Curso NodeJS!' })
 })
 
 app.use((req, res, next) => {
