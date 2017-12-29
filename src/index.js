@@ -25,7 +25,7 @@ app.get('/', (req, res, next) => {
   res.end()
 })
 
-app.get('/', (req, res, next) => {
+app.get('/temario', (req, res, next) => {
   res.write(`
     <h1>Curso NodeJS de OpenWebinars!</h1>
     <h2>Temario del curso</h2>
