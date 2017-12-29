@@ -42,6 +42,15 @@ app.use(
   express.static(path.join(__dirname, 'public'))
 )
 
+
+app.use((req, res, next) => {
+  res.render('404', {
+    title: 'Open Webinars',
+    message: `La ruta no existe!!!!!`
+  })
+  next(err)
+})
+
 app.listen('9000', () => {
   console.log('Server opened listen on http://localhost:9000')
 })
