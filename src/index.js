@@ -21,12 +21,6 @@ app.get('/', (req, res) => {
   // res.render('homeVars', { title: 'Open Webinars!', message: 'Curso NodeJS!' })
 })
 
-app.use((req, res, next) => {
-  const err = new Error('La ruta no existe !!!!')
-  err.status = 404
-  next(err)
-})
-
 app.listen('9000', () => {
   console.log('Server opened listen on http://localhost:9000')
 })
