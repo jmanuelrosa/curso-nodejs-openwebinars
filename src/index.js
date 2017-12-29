@@ -30,10 +30,11 @@ app.get('/temario', (req, res, next) => {
   })
 })
 
-app.use(
-  '/static',
-  express.static(path.join(__dirname, 'public'))
-)
+app.get('/temario', (req, res, next) => {
+  res.render('temario', {
+    title: 'Open Webinars'
+  })
+})
 
 app.listen('9000', () => {
   console.log('Server opened listen on http://localhost:9000')
