@@ -30,12 +30,6 @@ app.get('/temario', (req, res, next) => {
   })
 })
 
-app.get('/temario', (req, res, next) => {
-  res.render('temario', {
-    title: 'Open Webinars'
-  })
-})
-
 app.listen('9000', () => {
   console.log('Server opened listen on http://localhost:9000')
 })
