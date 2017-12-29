@@ -3,8 +3,6 @@ import express from 'express'
 import bodyParser from 'body-parser'
 import logger from 'morgan'
 
-import router from './router'
-
 const app = express()
 
 app.disable('x-powered-by')
@@ -18,12 +16,21 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'pug')
 
-router(app)
+// Rutas
+app.get('/', (req, res, next) => {
+  res.write(`
+    <h1>Curso NodeJS de OpenWebinars!</h1>
+    <a href="/temario">Temario</a>
+  `)
+  res.end()
+})
 
-app.use((req, res, next) => {
-  const err = new Error('La ruta no existe !!!!')
-  err.status = 404
-  next(err)
+app.get('/', (req, res, next) => {
+  res.write(`
+    <h1>Curso NodeJS de OpenWebinars!</h1>
+    <h2>Temario del curso</h2>
+  `)
+  res.end()
 })
 
 app.listen('9000', () => {
