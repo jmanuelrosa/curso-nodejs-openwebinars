@@ -30,6 +30,13 @@ app.get('/temario', (req, res, next) => {
   })
 })
 
+app.get('/:user', (req, res, next) => {
+  res.render('user', {
+    title: 'Open Webinars',
+    message: `Bienvenido usuario ${req.params.user}`
+  })
+})
+
 app.use(
   '/static',
   express.static(path.join(__dirname, 'public'))
