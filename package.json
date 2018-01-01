@@ -28,7 +28,8 @@
   "scripts": {
     "start": "node --require 'babel-register' src/index.js",
     "watch": "nodemon",
-    "lint": "standard 'src/**/*.js'"
+    "lint": "standard 'src/**/*.js'",
+    "test": "NODE_ENV=test mocha --compilers js:babel-register --timeout 10000 tests/"
   },
   "dependencies": {
     "dotenv": "^4.0.0",
@@ -41,7 +42,9 @@
     "babel-register": "^6.26.0",
     "body-parser": "^1.18.2",
     "jwt-simple": "^0.5.1",
+    "mocha": "^4.1.0",
     "nodemon": "^1.14.3",
-    "standard": "^10.0.3"
+    "standard": "^10.0.3",
+    "supertest": "^3.0.0"
   }
 }
