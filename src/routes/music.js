@@ -1,6 +1,7 @@
 import express from 'express'
 
 import mocks from '../../mocks'
+import { auth } from '../middlewares'
 
 const router = express.Router()
 
@@ -10,7 +11,7 @@ router
       .status(200)
       .json(mocks)
   })
-  .post('/', (req, res, next) => {
+  .post('/', auth, (req, res, next) => {
     console.log('Body received:', req.body)
 
     res
@@ -18,16 +19,17 @@ router
       .json(req.body)
   })
 
-router.get('/:singer', (req, res, next) => {
-  console.log('a', req.params.singer)
-  const songsBySingers = mocks
-    .filter(item =>
-      item.singer.toLowerCase() === req.params.singer.toLowerCase()
-    )
+router
+  .get('/:singer', (req, res, next) => {
+    console.log('a', req.params.singer)
+    const songsBySingers = mocks
+      .filter(item =>
+        item.singer.toLowerCase() === req.params.singer.toLowerCase()
+      )
 
-  res
-    .status(200)
-    .json(songsBySingers)
-})
+    res
+      .status(200)
+      .json(songsBySingers)
+  })
 
 export default router
