@@ -10,9 +10,15 @@ const server = {
 
     config(app)
 
-    _server = app.listen('9000', () => {
+    _server = app.listen(app.locals.config.PORT, () => {
+      const address = _server.address()
+      const host = address.address === '::'
+        ? 'localhost'
+        : address
+
+      const port = app.locals.config.PORT
       if (process.env.NODE_ENV !== 'test') {
-        console.log('Server opened listen on http://localhost:9000')
+        console.log(`Server opened listen on http://${host}:${port}`)
       }
     })
   },
