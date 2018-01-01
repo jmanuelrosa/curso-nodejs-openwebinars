@@ -1,6 +1,7 @@
 import express from 'express'
 
 import config from './config'
+import router from './router'
 
 let _server
 
@@ -9,31 +10,7 @@ const server = {
     const app = express()
 
     config(app)
-
-    // Rutas
-    app.get('/', (req, res, next) => {
-      res
-        .status(200)
-        .json({ data: 'metodo get' })
-    })
-
-    app.post('/', (req, res, next) => {
-      res
-        .status(200)
-        .json({ data: 'metodo post' })
-    })
-
-    app.put('/', (req, res, next) => {
-      res
-        .status(200)
-        .json({ data: 'metodo put' })
-    })
-
-    app.delete('/', (req, res, next) => {
-      res
-        .status(200)
-        .json({ data: 'metodo delete' })
-    })
+    router(app)
 
     _server = app.listen(app.locals.config.PORT, () => {
       const address = _server.address()
