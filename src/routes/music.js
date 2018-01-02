@@ -12,8 +12,6 @@ router
       .json(mocks)
   })
   .post('/', auth, (req, res, next) => {
-    console.log('Body received:', req.body)
-
     res
       .status(201)
       .json(req.body)
@@ -21,7 +19,6 @@ router
 
 router
   .get('/:singer', (req, res, next) => {
-    console.log('a', req.params.singer)
     const songsBySingers = mocks
       .filter(item =>
         item.singer.toLowerCase() === req.params.singer.toLowerCase()

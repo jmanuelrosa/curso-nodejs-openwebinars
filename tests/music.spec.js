@@ -4,9 +4,10 @@ import request from 'supertest'
 import server from '../src'
 import mocks from '../mocks'
 
-let instance = undefined
 
 describe('Music', () => {
+  let instance = undefined
+
   beforeEach(() => {
     instance = server.start()
   })
@@ -29,7 +30,7 @@ describe('Music', () => {
 
   describe('/GET /music/RagnBone', () => {
     it('it should GET', () => {
-      const expected = mocks.find(item =>
+      const expected = mocks.filter(item =>
         item.singer.toLowerCase() === 'RagnBone'.toLowerCase()
       )
 
@@ -37,10 +38,13 @@ describe('Music', () => {
         .get('/music/RagnBone')
         .expect('Content-Type', /json/)
         .expect(200, expected)
+        .end(function (err, res) {
+          if (err) throw err;
+        })
     })
   })
 
-  describe('/POST /music', () => {
+  describe('/POST /music', done => {
     it('it should GET', () => {
       const token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.e30.FyKpDq5EUXNk0AHqWmrK2LVgtV4maW7VRWSET6oDOoE'
 
@@ -55,6 +59,9 @@ describe('Music', () => {
         .set('Authorization', `JWT ${token}`)
         .send(body)
         .expect(201, body)
+        .end(function (err, res) {
+          if (err) throw err;
+        })
     })
   })
 })
