@@ -11,5 +11,7 @@ export const connect = () => {
 }
 
 export const send = (method, url, data) => {
-  instance.send(`${method} ${url} ${JSON.stringify(data)}`)
+  if (instance) {
+    instance.send(`${method} ${url} ${JSON.stringify(data)}`)
+  }
 }

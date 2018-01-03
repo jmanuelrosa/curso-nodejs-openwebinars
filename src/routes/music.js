@@ -1,7 +1,7 @@
 import express from 'express'
 
 import { send as wsSend } from '../socket'
-import mocks from '../../mocks'
+import mocks from '../mocks'
 import { auth } from '../middlewares'
 
 const router = express.Router()
