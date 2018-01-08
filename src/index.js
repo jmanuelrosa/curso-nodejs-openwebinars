@@ -2,7 +2,6 @@ import express from 'express'
 
 import config from './config'
 import router from './router'
-import { connect } from './socket'
 
 let _server
 
@@ -14,8 +13,6 @@ const server = {
     router(app)
 
     _server = app.listen(app.locals.config.PORT, () => {
-      connect()
-
       const address = _server.address()
       const host = address.address === '::'
         ? 'localhost'
